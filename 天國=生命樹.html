@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>天國主畫面</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Microsoft JhengHei", sans-serif;
+
+        /* ⭐ 背景光流動畫 */
+        background: radial-gradient(circle at 20% 30%, rgba(0,150,255,0.25), transparent 60%),
+                    radial-gradient(circle at 80% 70%, rgba(255,180,0,0.25), transparent 60%),
+                    black;
+        animation: bgFlow 12s infinite alternate ease-in-out;
+    }
+
+    @keyframes bgFlow {
+        0% { background-position: 20% 30%, 80% 70%; }
+        100% { background-position: 30% 40%, 70% 60%; }
+    }
+
+    /* 背景圖片容器 */
+    .bg-container {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        background: url('天國-20251017.png') no-repeat center center;
+        background-size: contain;
+    }
+
+    /* 按鈕（透明） */
+    .btn {
+        position: absolute;
+        cursor: pointer;
+        background: rgba(255,255,255,0);
+        border: none;
+        width: 260px;
+        height: 70px;
+        transition: 0.3s;
+    }
+
+    .btn:hover {
+        box-shadow: 0 0 18px #00B0F0;
+        transform: scale(1.05);
+    }
+
+    /* ⭐ 視窗縮放＋滑入 */
+    @keyframes modalPop {
+        from { opacity: 0; transform: scale(0.85) translateX(-60px); }
+        to { opacity: 1; transform: scale(1) translateX(0); }
+    }
+
+    /* 彈出視窗背景 */
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.8);
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* ⭐ 毛玻璃效果 */
+    .modal-content {
+        background: rgba(34, 34, 34, 0.45);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border: 1px solid rgba(255,255,255,0.15);
+        box-shadow: 0 0 25px rgba(255,255,255,0.25);
+        padding: 30px;
+        border-radius: 14px;
+        width: 60%;
+        color: white;
+        font-size: 24px;
+        line-height: 1.6;
+        animation: modalPop 0.8s ease;
+    }
+
+    .close {
+        float: right;
+        cursor: pointer;
+        font-size: 32px;
+        color: #ff6666;
+    }
+
+    /* ⭐ 經文光暈呼吸效果 */
+    .glow-text {
+        color: #3399ff;
+        font-weight: bold;
+        font-family: DFKai-SB;
+        font-size: 40px;
+        text-shadow: 0 0 12px #3399ff;
+        animation: glowPulse 2.5s infinite ease-in-out;
+    }
+
+    @keyframes glowPulse {
+        0% { text-shadow: 0 0 8px #3399ff; opacity: 0.85; }
+        50% { text-shadow: 0 0 22px #66ccff; opacity: 1; }
+        100% { text-shadow: 0 0 8px #3399ff; opacity: 0.85; }
+    }
+
+    @media (max-width: 600px) {
+        .modal-content {
+            width: 90%;
+            padding: 20px;
+            font-size: 18px;
+        }
+        .glow-text {
+            font-size: 28px !important;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="bg-container">
+
+    <!-- 1. 耶穌＝真葡萄樹 -->
+    <button class="btn" style="top: 45%; left: 22%;"
+        onclick="openModal(
+            '<span style=&quot;color:#E97132;font-weight:bold;font-size:54px;&quot;>耶穌＝真葡萄樹</span>',
+            '43約翰福音第15章1節',
+            '我是真葡萄樹，我父是栽培的人。',
+            ''
+        )">
+    </button>
+
+    <!-- 2. 耶穌＝道路、真理、生命 -->
+    <button class="btn" style="top: 61%; left: 20%;"
+        onclick="openModal(
+            '<span style=&quot;color:#E97132;font-weight:bold;font-size:54px;&quot;>耶穌＝道路、真理、生命</span>',
+            '43約翰福音第14章6節',
+            '我就是道路、真理、生命；若不藉著我，沒有人能到父那裡去。',
+            ''
+        )">
+    </button>
+
+    <!-- 3. 天國＝耶穌同在的地方 -->
+    <button class="btn" style="top: 80%; left: 20%;"
+        onclick="openModal(
+            '<span style=&quot;color:#E97132;font-weight:bold;font-size:54px;&quot;>天國＝耶穌同在的地方</span>',
+            '40馬太福音第3章16節',
+            '耶穌受了洗，隨即從水裏上來,天忽然為他開了，他就看見　神的靈彷彿鴿子降下，落在他身上。',
+            '<span style=&quot;font-size:32px;font-weight:bold;&quot;>' +
+            '1. 神在的地方就是天，神在哪裡，哪裡就代表天國。<br>' +
+            '2. 2000年前神的靈跟耶穌同在，耶穌就相當於初臨時的神的國，找到耶穌，就找到天國。<br>' +
+            '3. 2000年前耶穌來的時候，說了很多比喻，其中包含了很多天國的比喻。' +
+            '</span>'
+        )">
+    </button>
+
+    <!-- 4. 樹＝人＝牧者 -->
+    <button class="btn" style="top: 24%; left: 30%;"
+        onclick="openModal(
+            '<span style=&quot;color:#E97132;font-weight:bold;font-size:54px;&quot;>樹＝人＝牧者</span>',
+            '23以賽亞書第5章7節',
+            '萬軍之耶和華的葡萄園就是以色列家；他所喜愛的樹就是猶大人。',
+            ''
+        )">
+    </button>
+
+</div>
+
+<!-- ⭐ 彈出視窗 -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">×</span>
+
+        <!-- 標題 -->
+        <div id="modal-title"></div>
+
+        <!-- 經文（逐字＋光暈） -->
+        <div id="modal-verse"></div>
+
+        <!-- 解釋文字 -->
+        <div id="modal-extra" style="margin-top:20px;"></div>
+    </div>
+</div>
+
+<script>
+
+/* ⭐ 逐字動畫 */
+function typeWriter(element, text, speed = 60) {
+    element.innerText = "";
+    let i = 0;
+    function typing() {
+        if (i < text.length) {
+            element.innerText += text.charAt(i);
+            i++;
+            setTimeout(typing, speed);
+        }
+    }
+    typing();
+}
+
+/* ⭐ 開啟視窗（兩段逐字） */
+function openModal(titleHtml, verseLine1, verseLine2, extraHtml) {
+
+    document.getElementById("modal-title").innerHTML = titleHtml;
+
+    const verseEl = document.getElementById("modal-verse");
+    const extraEl = document.getElementById("modal-extra");
+
+    verseEl.innerHTML = "";
+    extraEl.innerHTML = extraHtml;
+
+    document.getElementById("modal").style.display = "flex";
+
+    // ⭐ 第一段逐字
+    const line1 = document.createElement("div");
+    line1.className = "glow-text";
+    verseEl.appendChild(line1);
+    typeWriter(line1, verseLine1, 60);
+
+    // ⭐ 第二段逐字（延遲）
+    setTimeout(() => {
+        const line2 = document.createElement("div");
+        line2.className = "glow-text";
+        verseEl.appendChild(line2);
+        typeWriter(line2, verseLine2, 60);
+    }, verseLine1.length * 60 + 300);
+}
+
+/* ⭐ 關閉視窗 */
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
+</script>
+
+</body>
+</html>
