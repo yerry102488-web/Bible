@@ -10,7 +10,7 @@
         font-family: "Microsoft JhengHei", sans-serif;
 
         /* ⭐ 背景光流動畫 */
-        background: radial-gradient(circle at 20% 30%, rgba(0,150,255,0.25), transparent 60%),
+        background: radial-gradient(circle at 20% 30%, rgba(140, 196, 236, 0.25), transparent 60%),
                     radial-gradient(circle at 80% 70%, rgba(255,180,0,0.25), transparent 60%),
                     black;
         animation: bgFlow 12s infinite alternate ease-in-out;
@@ -244,6 +244,8 @@
 </div>
 
 <script>
+
+/* ⭐ 逐字動畫 */
 function typeWriter(element, text, speed = 60) {
     element.innerText = "";
     let i = 0;
@@ -257,7 +259,17 @@ function typeWriter(element, text, speed = 60) {
     typing();
 }
 
-/* ⭐ 開啟視窗（兩段逐字） */
+/* ⭐ 語音朗讀功能 */
+function speakText(text) {
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = "zh-TW";     // 使用台灣中文語音
+    utter.rate = 1;           // 語速
+    utter.pitch = 1;          // 音調
+    speechSynthesis.cancel(); // 先停止其他語音
+    speechSynthesis.speak(utter);
+}
+
+/* ⭐ 開啟視窗（逐字＋語音） */
 function openModal(titleHtml, verseLine1, verseLine2, extraHtml) {
 
     document.getElementById("modal-title").innerHTML = titleHtml;
@@ -270,28 +282,30 @@ function openModal(titleHtml, verseLine1, verseLine2, extraHtml) {
 
     document.getElementById("modal").style.display = "flex";
 
-    // 第一段逐字（橘色）
+    // ⭐ 第一段逐字
     const line1 = document.createElement("div");
-    line1.style.color = "#E97132";
-    line1.style.fontFamily = "DFKai-SB";
-    line1.style.fontSize = "32px";
-    line1.style.textShadow = "0 0 12px #E97132";
+    line1.className = "glow-text";
     verseEl.appendChild(line1);
     typeWriter(line1, verseLine1, 60);
 
-    // 第二段逐字（藍色）
+    // ⭐ 第二段逐字（延遲）
     setTimeout(() => {
         const line2 = document.createElement("div");
-        line2.className = "glow-text";  // 呼吸光暈
+        line2.className = "glow-text";
         verseEl.appendChild(line2);
         typeWriter(line2, verseLine2, 60);
     }, verseLine1.length * 60 + 300);
+
+    // ⭐ 語音朗讀（把兩段經文合併）
+    speakText(verseLine1 + "。" + verseLine2);
 }
 
 /* ⭐ 關閉視窗 */
 function closeModal() {
+    speechSynthesis.cancel(); // 停止語音
     document.getElementById("modal").style.display = "none";
 }
+
 </script>
 
 </body>
