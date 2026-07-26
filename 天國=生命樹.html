@@ -183,6 +183,16 @@
 
 <script>
 
+/* ⭐ 語音朗讀功能 */
+function speakText(text) {
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = "zh-TW";     // 使用中文語音
+    utter.rate = 1;           // 語速（1 = 正常）
+    utter.pitch = 1;          // 音調
+    speechSynthesis.speak(utter);
+}
+
+
 /* ⭐ 逐字動畫 */
 function typeWriter(element, text, speed = 60) {
     element.innerText = "";
@@ -223,6 +233,9 @@ function openModal(titleHtml, verseLine1, verseLine2, extraHtml) {
         verseEl.appendChild(line2);
         typeWriter(line2, verseLine2, 60);
     }, verseLine1.length * 60 + 300);
+
+    // ⭐ 語音朗讀（把兩段經文合併）
+    speakText(verseLine1 + "。" + verseLine2);
 }
 
 /* ⭐ 關閉視窗 */
